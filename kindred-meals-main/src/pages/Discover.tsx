@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MapPin, Clock, Users, Star, Heart, Calendar, Utensils } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import { useLocation } from "react-router-dom";
 
 const mockRestaurants = [
   {
@@ -28,7 +29,7 @@ const mockRestaurants = [
   }
 ];
 
-const mockGroups = [
+const mockGroupsWomen = [
   {
     id: 1,
     restaurant: "مطعم الأصالة العربية",
@@ -36,15 +37,34 @@ const mockGroups = [
     time: "7:00 مساءً",
     members: [
       { name: "سارة أحمد", avatar: "س", interests: ["الطبخ", "السفر"] },
-      { name: "محمد علي", avatar: "م", interests: ["التقنية", "الرياضة"] },
       { name: "فاطمة خالد", avatar: "ف", interests: ["الكتب", "الفن"] },
-      { name: "أحمد محمود", avatar: "أ", interests: ["الموسيقى", "التصوير"] },
+      { name: "منى يوسف", avatar: "م", interests: ["الموسيقى", "التصوير"] },
+      { name: "ريم صالح", avatar: "ر", interests: ["الطبيعة", "القراءة"] },
     ],
     spotsLeft: 1
   }
 ];
 
+const mockGroupsMen = [
+  {
+    id: 1,
+    restaurant: "بيت الباستا الإيطالي",
+    date: "الخميس",
+    time: "8:00 مساءً",
+    members: [
+      { name: "محمد علي", avatar: "م", interests: ["التقنية", "الرياضة"] },
+      { name: "أحمد محمود", avatar: "أ", interests: ["الموسيقى", "التصوير"] },
+      { name: "خالد سعيد", avatar: "خ", interests: ["الكتب", "الطبخ"] },
+      { name: "سالم ناصر", avatar: "س", interests: ["السفر", "الأفلام"] },
+    ],
+    spotsLeft: 2
+  }
+];
+
 const Discover = () => {
+  const location = useLocation();
+  const isWomen = location.pathname.startsWith("/women");
+  const groups = isWomen ? mockGroupsWomen : mockGroupsMen;
   return (
     <div className="min-h-screen bg-gradient-warm" dir="rtl">
       <Navbar />
@@ -64,7 +84,7 @@ const Discover = () => {
               </Badge>
             </div>
 
-            {mockGroups.map((group) => (
+            {groups.map((group) => (
               <Card key={group.id} className="shadow-card border-0 bg-card mb-6">
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">

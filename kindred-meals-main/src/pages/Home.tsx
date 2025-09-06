@@ -3,9 +3,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Users, MapPin, Calendar, Star, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useGenderBasePath } from "@/hooks/use-gender-path";
 import heroImage from "@/assets/hero-dinner.jpg";
 
 const Home = () => {
+  const base = useGenderBasePath({ defaultToSelect: true });
   return (
     <div className="min-h-screen bg-gradient-warm" dir="rtl">
       {/* Hero Section */}
@@ -23,13 +25,13 @@ const Home = () => {
               انضم إلى مجموعات صغيرة من الأشخاص المتوافقين معك واستمتع بأمسيات عشاء لا تُنسى في أفضل مطاعم مدينتك
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link to="/discover">
+              <Link to={`${base}/discover`}>
                 <HeroButton variant="primary" className="min-w-48">
                   <Heart className="ml-2 h-5 w-5" />
                   ابدأ رحلتك الاجتماعية
                 </HeroButton>
               </Link>
-              <Link to="/profile">
+              <Link to={`${base}/profile`}>
                 <HeroButton variant="secondary" className="min-w-48">
                   <Users className="ml-2 h-5 w-5" />
                   تعرف على التطبيق
@@ -140,7 +142,7 @@ const Home = () => {
           <p className="text-xl text-white/90 mb-8 leading-relaxed">
             انضم إلى آلاف الأشخاص الذين يكتشفون صداقات جديدة كل أسبوع
           </p>
-          <Link to="/personality-test">
+          <Link to={`${base}/personality-test`}>
             <HeroButton variant="secondary" className="bg-white text-primary hover:bg-white/90 min-w-60">
               <Heart className="ml-2 h-5 w-5" />
               ابدأ الآن مجاناً

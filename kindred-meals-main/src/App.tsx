@@ -9,6 +9,8 @@ import Profile from "./pages/Profile";
 import PersonalityTest from "./pages/PersonalityTest";
 import Discover from "./pages/Discover";
 import NotFound from "./pages/NotFound";
+import GenderSelect from "./pages/GenderSelect";
+import GenderGuard from "@/components/GenderGuard";
 
 const queryClient = new QueryClient();
 
@@ -20,10 +22,19 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/personality-test" element={<PersonalityTest />} />
-          <Route path="/discover" element={<Discover />} />
+          <Route path="/select" element={<GenderSelect />} />
+          <Route path="/men" element={<GenderGuard allowed="men" />}>
+            <Route path="home" element={<Home />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="personality-test" element={<PersonalityTest />} />
+            <Route path="discover" element={<Discover />} />
+          </Route>
+          <Route path="/women" element={<GenderGuard allowed="women" />}>
+            <Route path="home" element={<Home />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="personality-test" element={<PersonalityTest />} />
+            <Route path="discover" element={<Discover />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
