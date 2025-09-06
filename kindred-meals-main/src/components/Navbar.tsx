@@ -3,6 +3,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Heart, User, Calendar, Settings, LogOut, Menu } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useGenderBasePath } from "@/hooks/use-gender-path";
 import { 
   Sheet,
   SheetContent,
@@ -13,21 +15,28 @@ import {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const base = useGenderBasePath();
 
   const NavLinks = () => (
     <>
-      <Button variant="ghost" className="text-foreground hover:bg-primary/10">
-        <Calendar className="ml-2 h-4 w-4" />
-        لقاءاتي
-      </Button>
-      <Button variant="ghost" className="text-foreground hover:bg-primary/10">
-        <Heart className="ml-2 h-4 w-4" />
-        الأصدقاء
-      </Button>
-      <Button variant="ghost" className="text-foreground hover:bg-primary/10">
-        <User className="ml-2 h-4 w-4" />
-        الملف الشخصي
-      </Button>
+      <Link to={`${base}/discover`} className="inline-flex">
+        <Button variant="ghost" className="text-foreground hover:bg-primary/10">
+          <Calendar className="ml-2 h-4 w-4" />
+          لقاءاتي
+        </Button>
+      </Link>
+      <Link to={`${base}/discover`} className="inline-flex">
+        <Button variant="ghost" className="text-foreground hover:bg-primary/10">
+          <Heart className="ml-2 h-4 w-4" />
+          الأصدقاء
+        </Button>
+      </Link>
+      <Link to={`${base}/profile`} className="inline-flex">
+        <Button variant="ghost" className="text-foreground hover:bg-primary/10">
+          <User className="ml-2 h-4 w-4" />
+          الملف الشخصي
+        </Button>
+      </Link>
     </>
   );
 

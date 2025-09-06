@@ -1,12 +1,17 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getStoredGender } from "@/hooks/use-gender";
 
 const Index = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // توجيه المستخدم إلى الصفحة الرئيسية
-    navigate("/home");
+    const gender = getStoredGender();
+    if (!gender) {
+      navigate("/select", { replace: true });
+      return;
+    }
+    navigate(gender === "men" ? "/men/home" : "/women/home", { replace: true });
   }, [navigate]);
 
   return (
