@@ -11,6 +11,7 @@ import Discover from "./pages/Discover";
 import NotFound from "./pages/NotFound";
 import GenderSelect from "./pages/GenderSelect";
 import GenderGuard from "@/components/GenderGuard";
+import RootRedirect from "@/components/RootRedirect";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/select" element={<GenderSelect />} />
+          {/* Legacy root routes -> redirect to gendered paths */}
+          <Route path="/home" element={<RootRedirect to="home" />} />
+          <Route path="/profile" element={<RootRedirect to="profile" />} />
+          <Route path="/discover" element={<RootRedirect to="discover" />} />
+          <Route path="/personality-test" element={<RootRedirect to="personality-test" />} />
           <Route path="/men" element={<GenderGuard allowed="men" />}>
             <Route path="home" element={<Home />} />
             <Route path="profile" element={<Profile />} />
